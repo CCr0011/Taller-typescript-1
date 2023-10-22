@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Series de Televisión</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="mb-4">TV Series</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Channel</th>
+                <th scope="col">Seasons</th>
+            </tr>
+        </thead>
+        <tbody id="seriesTableBody">
+                
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3"></td>
+                <td id="averageCell">Seasons average: </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script src="./Serie.js"></script>
+<script src="./Data.js"></script>
+
+
+<script>
+    window.onload = function() {
+            let tableBody = document.getElementById('seriesTableBody');
+            
+            for(let serie of series) {
+                let row = tableBody.insertRow();
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                let cell3 = row.insertCell(2);
+                let cell4 = row.insertCell(3);
+                cell1.innerHTML = serie.id.toString();
+                cell2.innerHTML = serie.name;
+                cell3.innerHTML = serie.channel;
+                cell4.innerHTML = serie.seasons.toString();  
+
+            }
+            let totalSeasons = 0;
+            for (let serie of series) {
+                totalSeasons += serie.seasons;
+            }
+            let averageSeasons = totalSeasons / series.length;
+            averageCell.textContent = `Seasons average: ${averageSeasons.toFixed(2)}`;
+            
+    }
+</script>
+</body>
+</html>
